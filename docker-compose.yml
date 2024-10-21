@@ -19,11 +19,11 @@ services:
       - "traefik.http.services.nginx.loadbalancer.server.port=8080"
 
   portfolio_datavis_api:
-    image: ${IMAGE}
+    image: ${DATA_VIS_IMAGE}
     container_name: portfolio_datavis_api
     restart: unless-stopped
     environment:
-      - IMAGE=${DATA_VIS_IMAGE}
+      - DATA_VIS_IMAGE=${DATA_VIS_IMAGE}
     networks:
       - proxy
     labels:
