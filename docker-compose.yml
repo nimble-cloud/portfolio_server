@@ -34,7 +34,7 @@ services:
       - "traefik.http.routers.portfolio_datavis_api.rule=Host(`portfolio-datavis-api.nimblecloud.app`)"
       - "traefik.http.routers.portfolio_datavis_api.entrypoints=https"
       - "traefik.http.routers.portfolio_datavis_api.tls=true"
-      - "traefik.http.services.100yards-api.loadbalancer.server.port=1323"
+      - "traefik.http.services.portfolio_datavis_api.loadbalancer.server.port=1323"
 
 networks:
   proxy:
