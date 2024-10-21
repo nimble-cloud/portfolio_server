@@ -1,0 +1,37 @@
+services:
+  portfolio_nginx:
+    image: nginx:stable-alpine-slim
+    container_name: portfolio_nginx
+    restart: always
+    networks:
+      - proxy
+    environment:
+      - NGINX_PORT=8080
+    volumes:
+      - ./html:/html
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.nginx.rule=(`portfolio.nimblecloud.app`)"
+      - "traefik.http.routers.nginx.entrypoints=http,https"
+      - "traefik.http.routers.nginx.tls=true"
+      - "traefik.http.services.nginx.loadbalancer.server.port=8080"
+
+    portfolio_datavis_api:
+      image:
+      container_name: portfolio_datavis_api
+      restart: unless-stopped
+      networks:
+        - proxy
+      labels:
+        - "traefik.enable=true"
+        - "traefik.docker.network=proxy"
+        - "traefik.http.routers.portfolio_datavis_api.rule=Host(`portfolio-datavis-api.nimblecloud.app`)"
+        - "traefik.http.routers.portfolio_datavis_api.entrypoints=https"
+        - "traefik.http.routers.portfolio_datavis_api.tls=true"
+        - "traefik.http.services.portfolio_datavis_api.loadbalancer.server.port=8080"
+
+networks:
+  proxy:
+    external: true
