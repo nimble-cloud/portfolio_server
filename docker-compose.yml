@@ -18,21 +18,21 @@ services:
       - "traefik.http.routers.nginx.tls=true"
       - "traefik.http.services.nginx.loadbalancer.server.port=8080"
 
-    portfolio_datavis_api:
-      image: ${IMAGE}
-      container_name: portfolio_datavis_api
-      restart: unless-stopped
-      environment:
-        - IMAGE=${DATA_VIS_IMAGE}
-      networks:
-        - proxy
-      labels:
-        - "traefik.enable=true"
-        - "traefik.docker.network=proxy"
-        - "traefik.http.routers.portfolio_datavis_api.rule=Host(`portfolio-datavis-api.nimblecloud.app`)"
-        - "traefik.http.routers.portfolio_datavis_api.entrypoints=https"
-        - "traefik.http.routers.portfolio_datavis_api.tls=true"
-        - "traefik.http.services.portfolio_datavis_api.loadbalancer.server.port=8080"
+  portfolio_datavis_api:
+    image: ${IMAGE}
+    container_name: portfolio_datavis_api
+    restart: unless-stopped
+    environment:
+      - IMAGE=${DATA_VIS_IMAGE}
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.portfolio_datavis_api.rule=Host(`portfolio-datavis-api.nimblecloud.app`)"
+      - "traefik.http.routers.portfolio_datavis_api.entrypoints=https"
+      - "traefik.http.routers.portfolio_datavis_api.tls=true"
+      - "traefik.http.services.portfolio_datavis_api.loadbalancer.server.port=8080"
 
 networks:
   proxy:
