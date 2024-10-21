@@ -31,7 +31,7 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
-      - "traefik.http.routers.portfolio_datavis_api.rule=Host(`portfolio-datavis-api.nimblecloud.app`)"
+      - "traefik.http.routers.portfolio_datavis_api.rule=(`portfolio-datavis-api.nimblecloud.app`)"
       - "traefik.http.routers.portfolio_datavis_api.entrypoints=https"
       - "traefik.http.routers.portfolio_datavis_api.tls=true"
       - "traefik.http.services.portfolio_datavis_api.loadbalancer.server.port=8080"
