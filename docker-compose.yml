@@ -16,6 +16,7 @@ services:
       - "traefik.http.routers.portfolio-nginx.rule=Host(`portfolio.nimblecloud.app`)"
       - "traefik.http.routers.portfolio-nginx.entrypoints=http,https"
       - "traefik.http.routers.portfolio-nginx.tls=true"
+      - "traefik.http.routers.profolio-router.middlewares=add-trailing-slash"
       - "traefik.http.services.portfolio-nginx.loadbalancer.server.port=8080"
 
   portfolio_datavis_api:
